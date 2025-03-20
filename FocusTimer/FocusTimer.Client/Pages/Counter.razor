@@ -1,13 +1,16 @@
 ﻿@page "/counter"
-@rendermode InteractiveWebAssembly
+@using MudBlazor
 
 <PageTitle>Counter</PageTitle>
 
 <h1>Counter</h1>
 
-<p role="status">Current count: @currentCount</p>
+<!-- MudBlazor button component -->
+<MudButton Color="Color.Primary" OnClick="@IncrementCount">
+    Click me
+</MudButton>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<p role="status">Current count: @currentCount</p>
 
 @code {
     private int currentCount = 0;
