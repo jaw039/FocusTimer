@@ -1,11 +1,15 @@
 using FocusTimer.Client.Pages;
 using FocusTimer.Components;
+using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveWebAssemblyComponents();
+
+// Add MudBlazor services
+builder.Services.AddMudServices();
 
 var app = builder.Build();
 
@@ -23,7 +27,6 @@ else
 
 app.UseHttpsRedirection();
 
-
 app.UseAntiforgery();
 
 app.MapStaticAssets();
@@ -32,3 +35,4 @@ app.MapRazorComponents<App>()
     .AddAdditionalAssemblies(typeof(FocusTimer.Client._Imports).Assembly);
 
 app.Run();
+
