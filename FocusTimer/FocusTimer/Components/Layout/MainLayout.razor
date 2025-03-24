@@ -1,4 +1,5 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime jSRuntime
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -20,6 +21,8 @@
         <!-- NavMenu goes here -->
         <NavMenu />
     </MudDrawer>
+
+    <MudButton OnClick="@(() => { _drawerOpen = !_drawerOpen; })" Color="Color.Primary">Toggle Drawer</MudButton>
 
     <MudMainContent>
         @Body
