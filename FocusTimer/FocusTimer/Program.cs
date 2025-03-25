@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
-    .AddInteractiveWebAssemblyComponents();
+    .AddInteractiveWebAssemblyComponents()
+    .AddInteractiveServerComponents();
 
 // Add MudBlazor services
 builder.Services.AddMudServices();
@@ -32,6 +33,7 @@ app.UseAntiforgery();
 app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveWebAssemblyRenderMode()
+    .AddInteractiveServerRenderMode()
     .AddAdditionalAssemblies(typeof(FocusTimer.Client._Imports).Assembly);
 
 app.Run();
