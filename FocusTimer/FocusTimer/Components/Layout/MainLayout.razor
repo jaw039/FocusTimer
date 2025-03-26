@@ -1,36 +1,31 @@
 ﻿@inherits LayoutComponentBase
+@inject IJSRuntime jSRuntime
+@using static MudBlazor.Icons.Material.Filled
 
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
-
 <MudLayout>
     <MudAppBar Color="Color.Primary" Elevation="4">
-        <!-- Hamburger Icon -->
-        <MudIconButton Icon="@MudBlazor.Icons.Material.Filled.Menu"
+        <MudIconButton Icon="@Menu"
                        Color="Color.Inherit"
                        Edge="Edge.Start"
                        OnClick="@ToggleDrawer" />
-
-        <!-- App Title -->
         <MudText Typo="Typo.h6" Class="ml-2">FocusTimer</MudText>
     </MudAppBar>
-
-    <MudDrawer @bind-Open="_drawerOpen" Variant="DrawerVariant.Temporary"  ClipMode="DrawerClipMode.Never">
-        <!-- NavMenu goes here -->
+    <MudDrawer @bind-Open="_drawerOpen" Variant="DrawerVariant.Responsive" ClipMode="DrawerClipMode.Never">
         <NavMenu />
     </MudDrawer>
-
+    <MudButton OnClick="@(() => { _drawerOpen = !_drawerOpen; })" Color="Color.Primary">Toggle Drawer</MudButton>
     <MudMainContent>
         @Body
     </MudMainContent>
 </MudLayout>
-
 @code {
     private bool _drawerOpen = false;
-
     private void ToggleDrawer()
     {
         _drawerOpen = !_drawerOpen;
+        Console.WriteLine($"Drawer is now: {(_drawerOpen ? "open" : "closed")}");
     }
 }
