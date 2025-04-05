@@ -1,5 +1,12 @@
-﻿<h3>CountdownClock</h3>
+﻿@using MudBlazor
+
+<MudText Typo = "Typo.h5"> CountdownClock </MudText>
+<MudText> Current Duration is: @Duration </MudText>
 
 @code {
+    // 1. Parameter
+    [Parameter]
+    public TimeSpan Duration { get; set; }
+
 
 }
