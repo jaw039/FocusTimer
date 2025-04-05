@@ -4,9 +4,20 @@
 <MudText> Current Duration is: @Duration </MudText>
 
 @code {
-    // 1. Parameter
-    [Parameter]
-    public TimeSpan Duration { get; set; }
+    // 1. Declare a parameter to receive the total countdown duration.
+    [Parameter] // marks duration as compoents input 
+    public TimeSpan Duration { get; set; }     // creating a public variable Duration that holds the lenght of time (timespan)
+    // TimeSpan Duration holds “how long”; [Parameter] lets the outside world set “how long.”
+
+
+    // 2. Declare a private field to hold the remaining time 
+    private TimeSpan _remaining; // Track how much time is left
+
+    protected override void OnParametersSet()
+    {
+        _remaining = Duration;
+    }
+
 
 
 }
