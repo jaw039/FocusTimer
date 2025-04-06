@@ -1,7 +1,14 @@
-﻿@using MudBlazor
+﻿@page "/CountdownClock"
+@using MudBlazor
 
 <MudText Typo = "Typo.h5"> CountdownClock </MudText>
 <MudText> Current Duration is: @Duration </MudText>
+<MudText>Dial picked: @_time</MudText>
+
+
+<MudTimePicker PickerVariant="PickerVariant.Static" @bind-Time="_time" AmPm="true" />
+<MudHidden Breakpoint="@Breakpoint.Xs">
+</MudHidden>
 
 @code {
     // 1. Declare a parameter to receive the total countdown duration.
@@ -19,5 +26,5 @@
     }
 
 
-
+    private TimeSpan? _time = new TimeSpan(13, 37, 00);
 }
