@@ -3,14 +3,21 @@
 
 <MudText Typo = "Typo.h5"> CountdownClock </MudText>
 <MudText> Current Duration is: @Duration </MudText>
-<MudText>Dial picked: @_time</MudText>
+@* <MudText>Dial picked: @_time</MudText> *@
 
 
-<MudTimePicker PickerVariant="PickerVariant.Static" @bind-Time="_time" AmPm="true" />
-<MudHidden Breakpoint="@Breakpoint.Xs">
-</MudHidden>
+@* <MudTimePicker PickerVariant="PickerVariant.Static" @bind-Time="_time" AmPm="true" /> *@
+@* <MudHidden Breakpoint="@Breakpoint.Xs"> *@
+@* </MudHidden> *@
+
+<MudText>Current Time: @_currentTime.ToString("h:mm:ss tt")</MudText>
+
+<MudButton Variant="Variant.Filled" Color="Color.Primary">Start</MudButton>
+<MudButton Variant="Variant.Filled" Color="Color.Secondary">Pause</MudButton>
+
 
 @code {
+
     // 1. Declare a parameter to receive the total countdown duration.
     [Parameter] // marks duration as compoents input 
     public TimeSpan Duration { get; set; }     // creating a public variable Duration that holds the lenght of time (timespan)
@@ -20,11 +27,47 @@
     // 2. Declare a private field to hold the remaining time 
     private TimeSpan _remaining; // Track how much time is left
 
+
     protected override void OnParametersSet()
     {
         _remaining = Duration;
     }
 
+    // private TimeSpan? _time = new TimeSpan(13, 37, 00);
+    private DateTime _currentTime;
 
-    private TimeSpan? _time = new TimeSpan(13, 37, 00);
+
+    private void UpdateClock(object? state)
+    {
+        InvokeAsync(() =>
+        {
+            _currentTime = DateTime.Now;
+
+            StateHasChanged();
+        });
+    }
+
+    private System.Threading.Timer? _clockTimer;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // set initial time to now 
+        _currentTime = DateTime.Now;
+
+        // create and start the timer
+        _clockTimer = new System.Threading.Timer(
+            callback: UpdateClock,
+            state: null,
+            dueTime: 0,
+            period: 1000
+        );
+    }
+    
+    // Make sure the clock stops runner after clicking off the page
+    public void Dispose()
+    {
+        _clockTimer?.Dispose();
+    }
+
+    
 }
