@@ -3,12 +3,12 @@
 
 <MudText Typo = "Typo.h5"> CountdownClock </MudText>
 <MudText> Current Duration is: @Duration </MudText>
-@* <MudText>Dial picked: @_time</MudText> *@
 
 
-@* <MudTimePicker PickerVariant="PickerVariant.Static" @bind-Time="_time" AmPm="true" /> *@
-@* <MudHidden Breakpoint="@Breakpoint.Xs"> *@
-@* </MudHidden> *@
+<MudText>Select Focus Duration:</MudText>
+<MudTimePicker PickerVariant="PickerVariant.Static" @bind-Time="_selectedDuration" AmPm="true" />  
+@* <MudHidden Breakpoint="@Breakpoint.Xs">  *@
+@* </MudHidden>  *@
 
 <MudText>Current Time: @_currentTime.ToString("h:mm:ss tt")</MudText>
 
@@ -68,6 +68,9 @@
     {
         _clockTimer?.Dispose();
     }
+
+    // Declare Variable for MudClock Component
+    private TimeSpan? _selectedDuration = new TimeSpan(0 , 25 , 0);
 
     
 }
