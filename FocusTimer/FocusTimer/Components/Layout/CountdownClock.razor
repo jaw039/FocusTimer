@@ -56,6 +56,7 @@
 
         // create and start the timer
         _clockTimer = new System.Threading.Timer(
+            // set time perimeter 
             callback: UpdateClock,
             state: null,
             dueTime: 0,
