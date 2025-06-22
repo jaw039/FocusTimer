@@ -1,12 +1,12 @@
-﻿@page "/CountdownClock"
+﻿@page "/Focus"
 @using MudBlazor
 
-<MudText Typo = "Typo.h5"> CountdownClock </MudText>
+<MudText Typo="Typo.h5"> CountdownClock </MudText>
 <MudText> Current Duration is: @Duration </MudText>
 
 
 <MudText>Select Focus Duration:</MudText>
-<MudTimePicker PickerVariant="PickerVariant.Static" @bind-Time="_selectedDuration" AmPm="true" />  
+<MudTimePicker PickerVariant="PickerVariant.Static" @bind-Time="_selectedDuration" AmPm="true" />
 @* <MudHidden Breakpoint="@Breakpoint.Xs">  *@
 @* </MudHidden>  *@
 
@@ -19,12 +19,12 @@
 @code {
 
     // 1. Declare a parameter to receive the total countdown duration.
-    [Parameter] // marks duration as compoents input 
+    [Parameter] // marks duration as compoents input
     public TimeSpan Duration { get; set; }     // creating a public variable Duration that holds the lenght of time (timespan)
     // TimeSpan Duration holds “how long”; [Parameter] lets the outside world set “how long.”
 
 
-    // 2. Declare a private field to hold the remaining time 
+    // 2. Declare a private field to hold the remaining time
     private TimeSpan _remaining; // Track how much time is left
 
 
@@ -51,19 +51,19 @@
 
     protected override async Task OnInitializedAsync()
     {
-        // set initial time to now 
+        // set initial time to now
         _currentTime = DateTime.Now;
 
         // create and start the timer
         _clockTimer = new System.Threading.Timer(
-            // set time perimeter 
+            // set time perimeter
             callback: UpdateClock,
             state: null,
             dueTime: 0,
             period: 1000
         );
     }
-    
+
     // Make sure the clock stops runner after clicking off the page
     public void Dispose()
     {
@@ -71,7 +71,7 @@
     }
 
     // Declare Variable for MudClock Component
-    private TimeSpan? _selectedDuration = new TimeSpan(0 , 25 , 0);
+    private TimeSpan? _selectedDuration = new TimeSpan(0, 25, 0);
 
-    
+
 }
